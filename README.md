@@ -10,7 +10,7 @@ Arquitetura utilizada: [Hexagonal](https://reflectoring.io/spring-hexagonal/)
 ![arquitetura hexagonal](https://reflectoring.io/assets/img/posts/spring-hexagonal/hexagonal-architecture.png)
 
 
-## Links de referência:
+## Links de referência
 uuid vs auto-increment links:
 
 https://arctype.com/blog/postgres-uuid/
