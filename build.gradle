@@ -1,0 +1,119 @@
+buildscript {
+
+	ext {
+		setProperty('postgresVersion', '42.2.23')
+	}
+
+	dependencies {
+		classpath "org.postgresql:postgresql:${postgresVersion}"
+	}
+}
+
+plugins {
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id "org.flywaydb.flyway" version "8.0.0-beta1"
+	id 'java'
+}
+
+ext {
+	setProperty('springfoxVersion', '3.0.0')
+	setProperty('mapstructVersion', '1.4.2.Final')
+	setProperty('openapiVersion', '1.5.10')
+}
+
+subprojects {
+	apply plugin: 'java'
+	apply plugin: 'io.spring.dependency-management'
+	apply plugin: 'java-library'
+
+	sourceCompatibility = '17'
+	group = 'com.appmarket'
+	version = projectVersion as Object
+
+	configurations {
+		compileOnly {
+			extendsFrom annotationProcessor
+		}
+	}
+
+	dependencies {
+		compileOnly 'org.projectlombok:lombok'
+		annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+		annotationProcessor 'org.projectlombok:lombok'
+		implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+		annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+	}
+
+	dependencyManagement {
+		imports {
+			mavenBom("org.springframework.boot:spring-boot-dependencies:2.5.5")
+		}
+	}
+
+	repositories {
+		mavenCentral()
+	}
+
+	test {
+		useJUnitPlatform()
+	}
+}
+
+jar {
+	enabled = false;
+}
+
+project(':adapters') {
+	jar {
+		enabled = false;
+	}
+}
+
+project(':adapters:rest-adapter') {
+	dependencies {
+		implementation project(':application')
+		implementation 'org.springframework.boot:spring-boot-starter-web'
+		//implementation "io.springfox:springfox-boot-starter:${springfoxVersion}"
+		implementation "org.springdoc:springdoc-openapi-ui:${openapiVersion}"
+	}
+}
+
+project(':adapters:persistence-adapter') {
+	dependencies {
+		implementation project(':application')
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+		runtimeOnly 'org.postgresql:postgresql'
+	}
+}
+
+project(':application') {
+	dependencies {
+		implementation 'org.springframework.boot:spring-boot-starter-validation'
+	}
+}
+
+project(':configuration') {
+	//apply plugin: 'application'
+
+	dependencies {
+		implementation project(':application')
+		implementation project(':adapters:rest-adapter')
+		implementation project(':adapters:persistence-adapter')
+		implementation 'org.springframework.boot:spring-boot-starter'
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+		runtimeOnly 'org.springframework.boot:spring-boot-devtools'
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	}
+
+	jar {
+		archivesBaseName = "${rootProject.name}"
+		enabled = false
+	}
+}
+
+flyway {
+	url = 'jdbc:postgresql://tiger.local:30010/appmarket_user'
+	user = 'appmarket_user'
+	password = 'appmarket_user'
+	locations = ['filesystem:./configuration/src/main/resources/db/migration']
+}

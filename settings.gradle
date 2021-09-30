@@ -1,0 +1,6 @@
+rootProject.name = projectName
+include 'application'
+include 'adapters:rest-adapter'
+include 'adapters:persistence-adapter'
+include 'configuration'
+

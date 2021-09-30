@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://tiger.local:30010/appmarket_user
+    username: appmarket_user
+    password: appmarket_user
+    hikari:
+      connectionTimeout: 20000
+      maximumPoolSize: 3
+
+logging:
+  level:
+    org:
+     hibernate:
+       SQL: DEBUG
+       type:
+         descriptor:
+           sql:
+             BasicBinder: TRACE
+
+
