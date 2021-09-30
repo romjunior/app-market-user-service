@@ -1,3 +1,17 @@
+# Serviço de gestão de usuários do App Market
+
+Serviço de gestão de usuários
+* cadastro
+* Edição
+* Alteração
+* Exclusão
+
+Arquitetura utilizada: [Hexagonal](https://reflectoring.io/spring-hexagonal/)
+![arquitetura hexagonal](https://reflectoring.io/assets/img/posts/spring-hexagonal/hexagonal-architecture.png)
+
+
+## Links de referência:
+---
 uuid vs auto-increment links:
 
 https://arctype.com/blog/postgres-uuid/
