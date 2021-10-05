@@ -11,6 +11,7 @@ Arquitetura utilizada: [Hexagonal](https://reflectoring.io/spring-hexagonal/)
 
 
 ## Links de referência:
+
 uuid vs auto-increment links:
 https://arctype.com/blog/postgres-uuid/
 
