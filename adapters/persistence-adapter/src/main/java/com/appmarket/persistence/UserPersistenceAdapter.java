@@ -3,6 +3,7 @@ package com.appmarket.persistence;
 import com.appmarket.application.port.out.CreateUser;
 import com.appmarket.application.port.out.EditUser;
 import com.appmarket.application.port.out.SearchUserByEmailOrLogin;
+import com.appmarket.application.port.out.SearchUserById;
 import com.appmarket.domain.User;
 import com.appmarket.persistence.mapper.ListUserEntityToUserMapper;
 import com.appmarket.persistence.mapper.UserEntityToUserMapper;
@@ -17,11 +18,12 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
-class UserPersistenceAdapter implements CreateUser, EditUser, SearchUserByEmailOrLogin {
+class UserPersistenceAdapter implements CreateUser, EditUser, SearchUserByEmailOrLogin, SearchUserById {
 
     UserRepository userRepository;
     RoleRepository roleRepository;
@@ -45,12 +47,17 @@ class UserPersistenceAdapter implements CreateUser, EditUser, SearchUserByEmailO
     }
 
     @Override
-    public User editUser(User user) {
-        return null;
+    public User editUser(final User user) {
+        return userEntityToUserMapper.toUser(userRepository.save(userToUserEntityMapper.toUserEntity(user)));
     }
 
     @Override
     public List<User> searchUserByEmailOrLogin(final String email, final String login) {
         return listUserEntityToUserMapper.toUserList(userRepository.findAllByEmailOrLogin(email, login));
+    }
+
+    @Override
+    public User searchUserById(UUID id) {
+        return userEntityToUserMapper.toUser(userRepository.getById(id));
     }
 }

@@ -5,13 +5,14 @@ import com.appmarket.application.port.out.EditUser;
 import com.appmarket.application.port.out.SearchUserById;
 import com.appmarket.domain.User;
 import com.appmarket.exception.UserNotFoundException;
+import org.springframework.stereotype.Service;
 
-//@Service
-public record EditUserService(SearchUserById searchUserById,
+@Service
+record EditUserService(SearchUserById searchUserById,
                               EditUser editUser) implements EditUserUseCase {
 
     @Override
-    public User editUser(EditUserCommand editUserCommand) throws UserNotFoundException {
+    public User editUser(EditUserCommand editUserCommand) {
 
         final var user = searchUserById.searchUserById(editUserCommand.getId());
 
@@ -25,13 +26,14 @@ public record EditUserService(SearchUserById searchUserById,
                 .email(editUserCommand.getEmail())
                 .roles(user.roles())
                 .document(editUserCommand.getDocument())
-                .password(getPassword(user, editUserCommand))
+                .password(getPassword(user.password(), editUserCommand.getPassword()))
+                .active(true)
                 .build();
 
         return editUser.editUser(userToBeEdited);
     }
 
-    String getPassword(final User user, final EditUserCommand editUserCommand) {
-        return editUserCommand.getPassword() == null ? user.password() : editUserCommand.getPassword();
+    String getPassword(final String password, final String newPassword) {
+        return newPassword == null ? password : newPassword;
     }
 }

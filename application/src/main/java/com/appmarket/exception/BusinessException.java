@@ -15,7 +15,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
-public class BusinessException extends Exception{
+public class BusinessException extends RuntimeException{
     String code;
     Map<String, String> body;
 

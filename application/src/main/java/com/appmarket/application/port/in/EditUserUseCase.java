@@ -11,6 +11,7 @@ import lombok.Value;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.UUID;
 
 public interface EditUserUseCase {
@@ -21,18 +22,17 @@ public interface EditUserUseCase {
     @EqualsAndHashCode(callSuper = false)
     class EditUserCommand extends SelfValidating<EditUserCommand> {
         @NotNull
-        @NotEmpty
         UUID id;
-        @NotNull
         @NotEmpty
         String name;
-        @NotNull
         @NotEmpty
+        @Size(max = 14, min = 11)
         String document;
-        @NotNull
         @Email
         String email;
+        @Size(max = 8, min = 5)
         String password;
+        @Size(max = 8, min = 5)
         String confirmedPassword;
 
         @Builder
@@ -53,7 +53,7 @@ public interface EditUserUseCase {
             this.validatePassword(password, confirmedPassword);
         }
 
-        private void validatePassword(final String password, final String confirmedPassword) throws PasswordNotMatchException {
+        private void validatePassword(final String password, final String confirmedPassword) {
             if(null != password && !password.equals(confirmedPassword)) {
                 throw new PasswordNotMatchException("Senhas não são iguais");
             }

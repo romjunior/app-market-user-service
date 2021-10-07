@@ -13,7 +13,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
-import static java.util.stream.Collectors.toMap;
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.mapping;
 
 @Slf4j
 @ControllerAdvice
@@ -23,7 +25,7 @@ public class RestResponseExceptionHandler extends ResponseEntityExceptionHandler
     ResponseEntity<Object> handleConstraintViolationException(final ConstraintViolationException ex, final WebRequest webRequest) {
         final var errors = ex.getConstraintViolations()
                 .stream()
-                .collect(toMap(ConstraintViolation::getPropertyPath, ConstraintViolation::getMessage));
+                .collect(groupingBy(ConstraintViolation::getPropertyPath, mapping(ConstraintViolation::getMessage, joining(", "))));
 
         log.error(ex.toString());
         return handleExceptionInternal(

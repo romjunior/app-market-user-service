@@ -1,6 +1,6 @@
-package com.appmarket.controller;
+package com.appmarket.usercreatecontroller;
 
-record UserRequest(
+record CreateUserRequest(
                 String name,
                 String document,
                 String login,

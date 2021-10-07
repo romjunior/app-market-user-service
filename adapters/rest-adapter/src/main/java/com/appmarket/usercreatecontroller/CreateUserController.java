@@ -1,8 +1,6 @@
-package com.appmarket.controller;
+package com.appmarket.usercreatecontroller;
 
 import com.appmarket.application.port.in.CreateUserUseCase;
-import com.appmarket.exception.PasswordNotMatchException;
-import com.appmarket.exception.UserAlreadyExistsException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 record CreateUserController(CreateUserUseCase createUserUseCase) {
 
     @PostMapping(path = "/user", consumes = "application/vnd.user.v1+json", produces = "application/vnd.user.v1+json")
-    ResponseEntity<UserIdResponse> createUser(@RequestBody final UserRequest request) throws PasswordNotMatchException, UserAlreadyExistsException {
+    ResponseEntity<UserIdResponse> createUser(@RequestBody final CreateUserRequest request) {
 
         final var response = createUserUseCase.createUser(CreateUserUseCase.CreateUserCommand.builder()
                 .name(request.name())
@@ -24,7 +22,7 @@ record CreateUserController(CreateUserUseCase createUserUseCase) {
                 .confirmedPassword(request.confirmedPassword())
                 .build());
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(new UserIdResponse(response));
+        return ResponseEntity.status(HttpStatus.CREATED).body(UserIdResponse.of(response));
     }
 
 }
