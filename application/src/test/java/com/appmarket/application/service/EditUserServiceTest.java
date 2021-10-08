@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import java.util.Optional;
 import java.util.UUID;
 
 class EditUserServiceTest {
@@ -68,7 +69,7 @@ class EditUserServiceTest {
                 .password("123456")
                 .build();
 
-        Mockito.when(searchUserById.searchUserById(uuid)).thenReturn(user);
+        Mockito.when(searchUserById.searchUserById(uuid)).thenReturn(Optional.of(user));
         Mockito.when(editUser.editUser(user)).thenReturn(user);
         final var resultUser = editUserService.editUser(command);
 

@@ -4,7 +4,6 @@ import com.appmarket.common.SelfValidating;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
@@ -16,12 +15,15 @@ public interface DeactivateUserUseCase {
     @EqualsAndHashCode(callSuper = false)
     class DeactivateUserCommand extends SelfValidating<DeactivateUserCommand> {
         @NotNull
-        @NotEmpty
         UUID id;
 
-        public DeactivateUserCommand(final UUID id) {
+        private DeactivateUserCommand(final UUID id) {
             this.id = id;
             this.validateSelf();
+        }
+
+        public static DeactivateUserCommand of(final UUID id) {
+            return new DeactivateUserCommand(id);
         }
     }
 

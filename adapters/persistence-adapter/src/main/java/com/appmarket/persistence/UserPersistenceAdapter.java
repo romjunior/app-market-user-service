@@ -1,6 +1,7 @@
 package com.appmarket.persistence;
 
 import com.appmarket.application.port.out.CreateUser;
+import com.appmarket.application.port.out.DeactivateUser;
 import com.appmarket.application.port.out.EditUser;
 import com.appmarket.application.port.out.SearchUserByEmailOrLogin;
 import com.appmarket.application.port.out.SearchUserById;
@@ -18,12 +19,13 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
-class UserPersistenceAdapter implements CreateUser, EditUser, SearchUserByEmailOrLogin, SearchUserById {
+class UserPersistenceAdapter implements CreateUser, EditUser, SearchUserByEmailOrLogin, SearchUserById, DeactivateUser {
 
     UserRepository userRepository;
     RoleRepository roleRepository;
@@ -57,7 +59,13 @@ class UserPersistenceAdapter implements CreateUser, EditUser, SearchUserByEmailO
     }
 
     @Override
-    public User searchUserById(UUID id) {
-        return userEntityToUserMapper.toUser(userRepository.getById(id));
+    public Optional<User> searchUserById(UUID id) {
+        return userRepository.findById(id)
+                .map(userEntityToUserMapper::toUser);
+    }
+
+    @Override
+    public void deactivateUser(User user) {
+        editUser(user);
     }
 }
