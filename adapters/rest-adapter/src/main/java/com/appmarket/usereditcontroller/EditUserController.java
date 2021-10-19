@@ -12,15 +12,16 @@ record EditUserController(EditUserUseCase editUserUseCase) {
 
     @PutMapping(value = "/user", consumes = "application/vnd.user.v1+json", produces = "application/vnd.user.v1+json")
     public ResponseEntity<UserIdResponse> editUser(@RequestBody final EditUserRequest request) {
-        final var response = editUserUseCase.editUser(EditUserUseCase.EditUserCommand.builder()
+        return editUserUseCase.editUser(EditUserUseCase.EditUserCommand.builder()
                 .id(request.id())
                 .name(request.name())
                 .document(request.document())
                 .email(request.email())
                 .password(request.password())
                 .confirmedPassword(request.confirmedPassword())
-                .build());
-        return ResponseEntity.ok(UserIdResponse.of(response.id()));
+                .build())
+                .map(user -> ResponseEntity.ok(UserIdResponse.of(user.id())))
+                .orElse(ResponseEntity.notFound().build());
     }
 
 }

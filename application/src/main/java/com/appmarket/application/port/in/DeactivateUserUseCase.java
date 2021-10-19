@@ -5,11 +5,12 @@ import lombok.EqualsAndHashCode;
 import lombok.Value;
 
 import javax.validation.constraints.NotNull;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface DeactivateUserUseCase {
 
-    void deactivateUser(final DeactivateUserCommand command);
+    Optional<UUID> deactivateUser(final DeactivateUserCommand command);
 
     @Value
     @EqualsAndHashCode(callSuper = false)

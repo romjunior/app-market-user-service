@@ -3,7 +3,6 @@ package com.appmarket.application.port.in;
 import com.appmarket.common.SelfValidating;
 import com.appmarket.domain.User;
 import com.appmarket.exception.PasswordNotMatchException;
-import com.appmarket.exception.UserNotFoundException;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
@@ -12,11 +11,12 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface EditUserUseCase {
 
-    User editUser(final EditUserCommand editUserCommand) throws UserNotFoundException;
+    Optional<User> editUser(final EditUserCommand editUserCommand);
 
     @Value
     @EqualsAndHashCode(callSuper = false)

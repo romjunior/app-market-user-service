@@ -4,17 +4,19 @@ import com.appmarket.application.port.in.DeactivateUserUseCase;
 import com.appmarket.application.port.out.DeactivateUser;
 import com.appmarket.application.port.out.SearchUserById;
 import com.appmarket.domain.User;
-import com.appmarket.exception.UserNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 record DeactivateUserService(SearchUserById searchUserById,
                                     DeactivateUser deactivateUser) implements DeactivateUserUseCase {
     @Override
-    public void deactivateUser(final DeactivateUserCommand command) {
-       searchUserById.searchUserById(command.getId())
+    public Optional<UUID> deactivateUser(final DeactivateUserCommand command) {
+       return searchUserById.searchUserById(command.getId())
                .map(User::deactivateUser)
-               .ifPresentOrElse(deactivateUser::deactivateUser,
-                       () -> { throw new UserNotFoundException("Usuário não encontrado"); });
+               .map(deactivateUser::deactivateUser)
+               .map(user -> command.getId());
     }
 }

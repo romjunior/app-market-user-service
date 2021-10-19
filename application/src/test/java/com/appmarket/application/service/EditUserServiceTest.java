@@ -4,7 +4,6 @@ import com.appmarket.application.port.in.EditUserUseCase;
 import com.appmarket.application.port.out.EditUser;
 import com.appmarket.application.port.out.SearchUserById;
 import com.appmarket.domain.User;
-import com.appmarket.exception.UserNotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,17 +33,17 @@ class EditUserServiceTest {
     @Test
     void deveRetornarUmErroCasoOUsuarioNaoExista() {
         final var uuid = UUID.randomUUID();
-
         final var command = EditUserUseCase.EditUserCommand.builder()
                 .id(uuid)
                 .name("nome")
                 .document("12345678901")
                 .email("nome@gmail.com")
                 .build();
+        final Optional<User> expected = Optional.empty();
 
-        Assertions.assertThrows(UserNotFoundException.class, () -> {
-            editUserService.editUser(command);
-        });
+        final var result = editUserService.editUser(command);
+
+        Assertions.assertEquals(expected, result);
         Mockito.verify(searchUserById).searchUserById(Mockito.any());
     }
 
@@ -73,7 +72,7 @@ class EditUserServiceTest {
         Mockito.when(editUser.editUser(user)).thenReturn(user);
         final var resultUser = editUserService.editUser(command);
 
-        Assertions.assertEquals(resultUser, user);
+        Assertions.assertEquals(Optional.of(user), resultUser);
         Mockito.verify(searchUserById).searchUserById(Mockito.any());
         Mockito.verify(editUser).editUser(Mockito.any());
     }

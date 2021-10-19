@@ -4,5 +4,5 @@ import com.appmarket.domain.User;
 
 public interface DeactivateUser {
 
-    void deactivateUser(final User user);
+    User deactivateUser(final User user);
 }
