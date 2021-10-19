@@ -4,6 +4,7 @@ import com.appmarket.application.port.out.AddRole;
 import com.appmarket.application.port.out.CreateUser;
 import com.appmarket.application.port.out.DeactivateUser;
 import com.appmarket.application.port.out.EditUser;
+import com.appmarket.application.port.out.GetRoleByUserId;
 import com.appmarket.application.port.out.SearchUserByEmailOrLogin;
 import com.appmarket.application.port.out.SearchUserById;
 import com.appmarket.domain.User;
@@ -26,6 +27,7 @@ class UserPersistenceAdapter implements CreateUser, EditUser, SearchUserByEmailO
 
     UserRepository userRepository;
     AddRole addRole;
+    GetRoleByUserId getRoleByUserId;
     UserMapper userMapper;
 
     @Override
@@ -51,7 +53,10 @@ class UserPersistenceAdapter implements CreateUser, EditUser, SearchUserByEmailO
     @Override
     public Optional<User> searchUserById(UUID id) {
         return userRepository.findById(id)
-                .map(userMapper::toUser);
+                .map(userEntity -> {
+                    final var roles = getRoleByUserId.getRolesByUserId(userEntity.getId());
+                    return userMapper.toUserWithRoles(userEntity, roles);
+                });
     }
 
     @Override
