@@ -1,4 +1,4 @@
-package com.appmarket.searchusercontroller;
+package com.appmarket.controllers.search;
 
 import com.appmarket.domain.User;
 import lombok.Builder;

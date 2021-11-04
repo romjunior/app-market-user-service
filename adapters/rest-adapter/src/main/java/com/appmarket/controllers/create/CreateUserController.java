@@ -1,6 +1,7 @@
-package com.appmarket.usercreatecontroller;
+package com.appmarket.controllers.create;
 
 import com.appmarket.application.port.in.CreateUserUseCase;
+import com.appmarket.config.CustomMediaType;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 record CreateUserController(CreateUserUseCase createUserUseCase) {
 
-    @PostMapping(path = "/user", consumes = "application/vnd.user.v1+json", produces = "application/vnd.user.v1+json")
+    @PostMapping(path = "/user", consumes = CustomMediaType.USER_V1, produces = CustomMediaType.USER_V1)
     ResponseEntity<UserIdResponse> createUser(@RequestBody final CreateUserRequest request) {
 
         final var response = createUserUseCase.createUser(CreateUserUseCase.CreateUserCommand.builder()

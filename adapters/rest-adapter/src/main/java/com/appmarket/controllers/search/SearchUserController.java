@@ -1,6 +1,7 @@
-package com.appmarket.searchusercontroller;
+package com.appmarket.controllers.search;
 
 import com.appmarket.application.port.in.SearchUserIdUseCase;
+import com.appmarket.config.CustomMediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,10 +12,10 @@ import java.util.UUID;
 @RestController
 record SearchUserController(SearchUserIdUseCase searchUserIdUseCase) {
 
-    @GetMapping(path = "/user/{id}", produces = "application/vnd.user.v1+json")
-    ResponseEntity<UserDTO> createUser(@PathVariable("id") final UUID id) {
-        final var user = searchUserIdUseCase.searchUserId(SearchUserIdUseCase.SearchUserIdCommand.of(id));
-        return user.map(UserDTO::buildDTO)
+    @GetMapping(path = "/user/{id}", produces = CustomMediaType.USER_V1)
+    ResponseEntity<UserDTO> searchUser(@PathVariable("id") final UUID id) {
+        return searchUserIdUseCase.searchUserId(SearchUserIdUseCase.SearchUserIdCommand.of(id))
+                .map(UserDTO::buildDTO)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }

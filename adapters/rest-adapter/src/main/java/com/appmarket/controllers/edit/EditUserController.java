@@ -1,7 +1,7 @@
-package com.appmarket.usereditcontroller;
+package com.appmarket.controllers.edit;
 
 import com.appmarket.application.port.in.EditUserUseCase;
-import com.appmarket.usercreatecontroller.UserIdResponse;
+import com.appmarket.controllers.create.UserIdResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;

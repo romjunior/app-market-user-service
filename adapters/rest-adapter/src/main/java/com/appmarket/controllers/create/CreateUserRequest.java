@@ -1,4 +1,4 @@
-package com.appmarket.usercreatecontroller;
+package com.appmarket.controllers.create;
 
 record CreateUserRequest(
                 String name,

@@ -1,4 +1,4 @@
-package com.appmarket.usereditcontroller;
+package com.appmarket.controllers.edit;
 
 import java.util.UUID;
 
