@@ -1,6 +1,7 @@
 package com.appmarket.controllers.edit;
 
 import com.appmarket.application.port.in.EditUserUseCase;
+import com.appmarket.config.CustomMediaType;
 import com.appmarket.controllers.create.UserIdResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 record EditUserController(EditUserUseCase editUserUseCase) {
 
-    @PutMapping(value = "/user", consumes = "application/vnd.user.v1+json", produces = "application/vnd.user.v1+json")
+    @PutMapping(value = "/user", consumes = CustomMediaType.USER_V1, produces = CustomMediaType.USER_V1)
     public ResponseEntity<UserIdResponse> editUser(@RequestBody final EditUserRequest request) {
         return editUserUseCase.editUser(EditUserUseCase.EditUserCommand.builder()
                 .id(request.id())

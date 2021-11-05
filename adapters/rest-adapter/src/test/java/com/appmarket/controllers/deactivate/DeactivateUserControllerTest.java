@@ -50,4 +50,15 @@ class DeactivateUserControllerTest {
                         .contentType(CustomMediaType.USER_V1))
                 .andExpect(status().isNotFound());
     }
+
+    @Test
+    void quandoTiverUmInputInvalido_deveRetornar400ComErro() throws Exception {
+        final UUID uuid = null;
+
+        Mockito.when(deactivateUserUseCase.deactivateUser(any())).thenReturn(Optional.empty());
+
+        mockMvc.perform(delete("/user/" + uuid)
+                        .contentType(CustomMediaType.USER_V1))
+                .andExpect(status().isBadRequest());
+    }
 }

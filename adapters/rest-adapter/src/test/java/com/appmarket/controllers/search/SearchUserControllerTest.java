@@ -17,6 +17,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -52,9 +53,10 @@ class SearchUserControllerTest {
 
         final var expectedResponse = UserDTO.buildDTO(user);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/user/" + uuid)
+        mockMvc.perform(get("/user/" + uuid)
                 .contentType(CustomMediaType.USER_V1))
                 .andExpect(status().isOk())
+                .andExpect(content().contentType(CustomMediaType.USER_V1))
                 .andExpect(content().json(objectMapper.writeValueAsString(expectedResponse)));
     }
 
