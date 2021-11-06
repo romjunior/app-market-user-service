@@ -13,7 +13,7 @@ import java.util.UUID;
 record DeactivateUserController(DeactivateUserUseCase deactivateUserUseCase) {
 
     @DeleteMapping(path = "/user/{id}", produces = CustomMediaType.USER_V1)
-    ResponseEntity<Object> deactivateUser(@PathVariable("id") final UUID id) {
+    public ResponseEntity<Object> deactivateUser(@PathVariable("id") final UUID id) {
         return deactivateUserUseCase.deactivateUser(DeactivateUserUseCase.DeactivateUserCommand.of(id))
                 .map(uuid -> ResponseEntity.noContent().build())
                 .orElse(ResponseEntity.notFound().build());

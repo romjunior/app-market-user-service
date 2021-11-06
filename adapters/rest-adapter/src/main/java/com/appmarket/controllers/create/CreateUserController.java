@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 record CreateUserController(CreateUserUseCase createUserUseCase) {
 
     @PostMapping(path = "/user", consumes = CustomMediaType.USER_V1, produces = CustomMediaType.USER_V1)
-    ResponseEntity<UserIdResponse> createUser(@RequestBody final CreateUserRequest request) {
+    public ResponseEntity<UserIdResponse> createUser(@RequestBody final CreateUserRequest request) {
 
         final var response = createUserUseCase.createUser(CreateUserUseCase.CreateUserCommand.builder()
                 .name(request.name())

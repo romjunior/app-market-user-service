@@ -13,7 +13,7 @@ import java.util.UUID;
 record SearchUserController(SearchUserIdUseCase searchUserIdUseCase) {
 
     @GetMapping(path = "/user/{id}", produces = CustomMediaType.USER_V1)
-    ResponseEntity<UserDTO> searchUser(@PathVariable("id") final UUID id) {
+    public ResponseEntity<UserDTO> searchUser(@PathVariable("id") final UUID id) {
         return searchUserIdUseCase.searchUserId(SearchUserIdUseCase.SearchUserIdCommand.of(id))
                 .map(UserDTO::buildDTO)
                 .map(ResponseEntity::ok)
