@@ -5,11 +5,17 @@ on:
       - main
   pull_request:
     types: [opened, synchronize, reopened]
+env:
+  LANG: "pt_BR.UTF-8"
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
     steps:
+      - name: pt_BR.UTF-8
+        run: |
+          sudo locale-gen pt_BR.UTF-8
+          sudo update-locale LANG=pt_BR.UTF-8
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
