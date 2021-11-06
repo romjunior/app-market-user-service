@@ -139,7 +139,7 @@ sonarqube {
 		property "sonar.projectKey", "romjunior_app-market-user-service"
 		property "sonar.organization", "romjunior"
 		property "sonar.host.url", "https://sonarcloud.io"
-		property 'sonar.projectVersion', projectVersion
+		//property 'sonar.projectVersion', projectVersion
 		property 'sonar.sourceEncoding', 'UTF-8'
 	}
 }
