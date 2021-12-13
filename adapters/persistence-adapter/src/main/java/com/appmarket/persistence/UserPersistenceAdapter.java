@@ -48,7 +48,12 @@ class UserPersistenceAdapter implements CreateUser, EditUser, SearchUserByEmailO
 
     @Override
     public List<User> searchUserByEmailOrLogin(final String email, final String login) {
-        return userMapper.toUserList(userRepository.findAllByEmailOrLogin(email, login));
+        return userRepository.findAllByEmailOrLogin(email, login)
+                .stream().map(userEntity -> userMapper.toUserWithRoles(
+                        userEntity,
+                        getRoleByUserId.getRolesByUserId(userEntity.getId())
+                    )
+                ).toList();
     }
 
     @Override

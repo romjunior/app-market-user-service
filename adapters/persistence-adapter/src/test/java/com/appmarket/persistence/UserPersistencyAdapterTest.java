@@ -14,7 +14,6 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,7 +23,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 
 @DataJpaTest
-@EnableJpaAuditing
 class UserPersistencyAdapterTest {
 
     @Autowired
@@ -116,17 +114,7 @@ class UserPersistencyAdapterTest {
         Mockito.when(getRoleByUserId.getRolesByUserId(any())).thenReturn(Set.of(Role.DEFAULT.name()));
         final var savedUser = userPersistenceAdapter.createUser(user);
 
-        final var expectedUser = User.builder()
-                .id(savedUser.id())
-                .name("john")
-                .document("12345678910")
-                .email("jhon@gmail.com")
-                .login("jhon")
-                .password("1234567")
-                .active(true)
-                .build();
-
-        Assertions.assertEquals(List.of(expectedUser), userPersistenceAdapter.searchUserByEmailOrLogin(searchEmail, searchLogin));
+        Assertions.assertEquals(List.of(savedUser), userPersistenceAdapter.searchUserByEmailOrLogin(searchEmail, searchLogin));
     }
 
     @Test
@@ -148,17 +136,7 @@ class UserPersistencyAdapterTest {
         Mockito.when(getRoleByUserId.getRolesByUserId(any())).thenReturn(Set.of(Role.DEFAULT.name()));
         final var savedUser = userPersistenceAdapter.createUser(user);
 
-        final var expectedUser = User.builder()
-                .id(savedUser.id())
-                .name("john")
-                .document("12345678910")
-                .email("jhon@gmail.com")
-                .login("jhon")
-                .password("1234567")
-                .active(true)
-                .build();
-
-        Assertions.assertEquals(List.of(expectedUser), userPersistenceAdapter.searchUserByEmailOrLogin(searchEmail, searchLogin));
+        Assertions.assertEquals(List.of(savedUser), userPersistenceAdapter.searchUserByEmailOrLogin(searchEmail, searchLogin));
     }
 
     @Test

@@ -23,3 +23,5 @@ https://medium.com/@FernandoUnix/gerando-chave-prim%C3%A1ria-uuid-com-jpa-e-hibe
 https://springbootdev.com/2018/03/13/spring-data-jpa-auditing-with-createdby-createddate-lastmodifiedby-and-lastmodifieddate/
 
 https://www.baeldung.com/java-performance-mapping-frameworks
+
+https://reflectoring.io/spring-boot-test/
