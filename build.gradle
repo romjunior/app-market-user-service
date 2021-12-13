@@ -133,6 +133,10 @@ project(':configuration') {
 		archivesBaseName = "${rootProject.name}"
 		enabled = false
 	}
+
+	sonarqube {
+		skipProject = true
+	}
 }
 
 sonarqube {
