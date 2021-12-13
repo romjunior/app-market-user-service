@@ -1,21 +1,24 @@
 package com.appmarket.exception;
 
+import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
+import lombok.experimental.FieldDefaults;
 
 import java.util.Map;
 
 @Value
 @EqualsAndHashCode(callSuper = false)
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class UserAlreadyExistsException extends BusinessException{
 
-    static String CODE = "USER_ALREADY_EXISTS";
+    static String code = "USER_ALREADY_EXISTS";
 
     public UserAlreadyExistsException(Map<String, String> body) {
-        super(CODE, body);
+        super(code, body);
     }
 
     public UserAlreadyExistsException(String message) {
-        super(message, CODE);
+        super(message, code);
     }
 }

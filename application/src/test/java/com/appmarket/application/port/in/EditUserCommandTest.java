@@ -11,60 +11,55 @@ class EditUserCommandTest {
 
     @Test
     void deveRetornarExceptionCasoOnomeDocumentEmailSejaVazio() {
-        Assertions.assertThrows(ConstraintViolationException.class, () -> {
-            EditUserUseCase.EditUserCommand.builder().build();
-        });
+        var editUserCommand = EditUserUseCase.EditUserCommand.builder();
+        Assertions.assertThrows(ConstraintViolationException.class, editUserCommand::build);
     }
 
     @Test
     void deveRetornarExceptionCasoODocumentoFiqueForaDoTamanhoEsperado() {
-        Assertions.assertThrows(ConstraintViolationException.class, () -> {
-            EditUserUseCase.EditUserCommand.builder()
-                    .id(UUID.randomUUID())
-                    .name("teste")
-                    .email("teste@gmail.com")
-                    .document("123456789101112")
-                    .build();
-        });
+        var editUserCommand = EditUserUseCase.EditUserCommand.builder()
+                .id(UUID.randomUUID())
+                .name("teste")
+                .email("teste@gmail.com")
+                .document("123456789101112");
+
+        Assertions.assertThrows(ConstraintViolationException.class, editUserCommand::build);
     }
 
     @Test
     void deveRetornarExceptionCasoEmailNaoEstejaNoFormatoEsperado() {
-        Assertions.assertThrows(ConstraintViolationException.class, () -> {
-            EditUserUseCase.EditUserCommand.builder()
-                    .id(UUID.randomUUID())
-                    .name("teste")
-                    .email("testegmail.com")
-                    .document("12345678901")
-                    .build();
-        });
+        var editUserCommand =  EditUserUseCase.EditUserCommand.builder()
+                .id(UUID.randomUUID())
+                .name("teste")
+                .email("testegmail.com")
+                .document("12345678901");
+
+        Assertions.assertThrows(ConstraintViolationException.class, editUserCommand::build);
     }
 
     @Test
     void deveRetornarExceptionCasoAsSenhasNaoCorrespondam() {
-        Assertions.assertThrows(PasswordNotMatchException.class, () -> {
-            EditUserUseCase.EditUserCommand.builder()
-                    .id(UUID.randomUUID())
-                    .name("teste")
-                    .email("teste@gmail.com")
-                    .password("12345")
-                    .confirmedPassword("123456")
-                    .document("123456789101")
-                    .build();
-        });
+        var editUserCommand = EditUserUseCase.EditUserCommand.builder()
+                .id(UUID.randomUUID())
+                .name("teste")
+                .email("teste@gmail.com")
+                .password("12345")
+                .confirmedPassword("123456")
+                .document("123456789101");
+
+        Assertions.assertThrows(PasswordNotMatchException.class, editUserCommand::build);
     }
 
     @Test
     void deveRetornarExceptionCasoASenhaSejaNula() {
-        Assertions.assertThrows(PasswordNotMatchException.class, () -> {
-            EditUserUseCase.EditUserCommand.builder()
-                    .id(UUID.randomUUID())
-                    .name("teste")
-                    .email("teste@gmail.com")
-                    .password("12345")
-                    .document("123456789101")
-                    .build();
-        });
+        var editUserCommand = EditUserUseCase.EditUserCommand.builder()
+                .id(UUID.randomUUID())
+                .name("teste")
+                .email("teste@gmail.com")
+                .password("12345")
+                .document("123456789101");
+
+        Assertions.assertThrows(PasswordNotMatchException.class, editUserCommand::build);
     }
 
 }
