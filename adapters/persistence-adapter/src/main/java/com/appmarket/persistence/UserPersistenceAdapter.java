@@ -2,7 +2,6 @@ package com.appmarket.persistence;
 
 import com.appmarket.application.port.out.AddRole;
 import com.appmarket.application.port.out.CreateUser;
-import com.appmarket.application.port.out.DeactivateUser;
 import com.appmarket.application.port.out.EditUser;
 import com.appmarket.application.port.out.GetRoleByUserId;
 import com.appmarket.application.port.out.SearchUserByEmailOrLogin;
@@ -25,7 +24,7 @@ import java.util.UUID;
 @Repository
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
-class UserPersistenceAdapter implements CreateUser, EditUser, SearchUserByEmailOrLogin, SearchUserById, DeactivateUser {
+class UserPersistenceAdapter implements CreateUser, EditUser, SearchUserByEmailOrLogin, SearchUserById {
 
     UserRepository userRepository;
     AddRole addRole;
@@ -44,7 +43,7 @@ class UserPersistenceAdapter implements CreateUser, EditUser, SearchUserByEmailO
 
     @Override
     public User editUser(final User user) {
-        return userMapper.toUser(userRepository.save(userMapper.toUserEntity(user)));
+     return userMapper.toUserWithRoles(userRepository.save(userMapper.toUserEntity(user)), user.roles());
     }
 
     @Override
@@ -59,10 +58,5 @@ class UserPersistenceAdapter implements CreateUser, EditUser, SearchUserByEmailO
                     final var roles = getRoleByUserId.getRolesByUserId(userEntity.getId());
                     return userMapper.toUserWithRoles(userEntity, roles);
                 });
-    }
-
-    @Override
-    public User deactivateUser(User user) {
-        return editUser(user);
     }
 }
