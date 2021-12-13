@@ -3,6 +3,7 @@ package com.appmarket.controllers.create;
 import com.appmarket.application.port.in.CreateUserUseCase;
 import com.appmarket.config.CustomMediaType;
 import com.appmarket.config.RestErrorResponse;
+import com.appmarket.exception.InconsistencyException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -76,6 +77,25 @@ class CreateUserControllerTest {
                 "PASSWORD_ALREADY_EXISTS",
                 Map.of(
                         "message", "Senhas não são iguais"
+                )
+        );
+
+        mockMvc.perform(post("/user")
+                        .contentType(CustomMediaType.USER_V1)
+                        .content(objectMapper.writeValueAsString(userRequest)))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().json(objectMapper.writeValueAsString(expectedErrorResponse)));
+    }
+
+    @Test
+    void quandoTiverUmErroDeInconsistencia_EntaoRetorna400ComRespostaDeNegocio() throws Exception {
+        final var userRequest = buildRequest("1234567", "1234567");
+
+        Mockito.when(createUserUseCase.createUser(any())).thenThrow(new InconsistencyException("role does not exists"));
+        final var expectedErrorResponse = new RestErrorResponse(
+                "INCONSISTENCY",
+                Map.of(
+                        "message", "role does not exists"
                 )
         );
 
