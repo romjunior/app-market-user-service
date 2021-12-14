@@ -6,7 +6,6 @@
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=romjunior_app-market-user-service&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=romjunior_app-market-user-service)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=romjunior_app-market-user-service&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=romjunior_app-market-user-service)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=romjunior_app-market-user-service&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=romjunior_app-market-user-service)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=romjunior_app-market-user-service&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=romjunior_app-market-user-service)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=romjunior_app-market-user-service&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=romjunior_app-market-user-service)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=romjunior_app-market-user-service&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=romjunior_app-market-user-service)
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=romjunior_app-market-user-service&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=romjunior_app-market-user-service)
