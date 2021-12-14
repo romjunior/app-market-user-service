@@ -125,6 +125,12 @@ project(':application') {
 			}))
 		}
 	}
+
+	sonarqube {
+		properties {
+			property 'sonar.exclusions', '**/exception'
+		}
+	}
 }
 
 project(':configuration') {
