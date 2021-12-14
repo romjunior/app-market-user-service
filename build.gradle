@@ -1,17 +1,5 @@
-buildscript {
-
-	ext {
-		setProperty('postgresVersion', '42.2.23')
-	}
-
-	dependencies {
-		classpath "org.postgresql:postgresql:${postgresVersion}"
-	}
-}
-
 plugins {
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id "org.flywaydb.flyway" version "8.0.0-beta1"
 	id "org.sonarqube" version "3.3"
 	id 'java'
 }
@@ -109,7 +97,7 @@ project(':adapters:persistence-adapter') {
 		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 		implementation 'org.flywaydb:flyway-core'
 		runtimeOnly 'org.postgresql:postgresql'
-		runtimeOnly 'com.h2database:h2'
+		testRuntimeOnly 'com.h2database:h2'
 	}
 }
 
@@ -117,14 +105,6 @@ project(':application') {
 	dependencies {
 		implementation 'org.springframework.boot:spring-boot-starter-validation'
 	}
-
-	/*jacocoTestReport {
-		afterEvaluate {
-			classDirectories.setFrom(files(classDirectories.files.collect {
-				fileTree(dir: it, excludes: ['\*\*\/exception'])
-			}))
-		}
-	}*/
 
 	sonarqube {
 		properties {
@@ -162,11 +142,4 @@ sonarqube {
 		property 'sonar.projectVersion', projectVersion
 		property 'sonar.sourceEncoding', 'UTF-8'
 	}
-}
-
-flyway {
-	url = 'jdbc:postgresql://tiger.local:30010/appmarket_user'
-	user = 'appmarket_user'
-	password = 'appmarket_user'
-	locations = ['filesystem:./configuration/src/main/resources/db/migration']
 }
