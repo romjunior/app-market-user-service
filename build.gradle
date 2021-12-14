@@ -117,6 +117,14 @@ project(':application') {
 	dependencies {
 		implementation 'org.springframework.boot:spring-boot-starter-validation'
 	}
+
+	jacocoTestReport {
+		afterEvaluate {
+			classDirectories.setFrom(files(classDirectories.files.collect {
+				fileTree(dir: it, excludes: ['**/exception'])
+			}))
+		}
+	}
 }
 
 project(':configuration') {
@@ -145,7 +153,7 @@ sonarqube {
 		property "sonar.projectKey", "romjunior_app-market-user-service"
 		property "sonar.organization", "romjunior"
 		property "sonar.host.url", "https://sonarcloud.io"
-		//property 'sonar.projectVersion', projectVersion
+		property 'sonar.projectVersion', projectVersion
 		property 'sonar.sourceEncoding', 'UTF-8'
 	}
 }
