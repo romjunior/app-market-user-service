@@ -21,7 +21,7 @@ record CreateUserService(SearchUserByEmailOrLogin searchUserByEmailOrLogin,
     public UUID createUser(final CreateUserCommand command) {
         final var userList = searchUserByEmailOrLogin.searchUserByEmailOrLogin(command.getEmail(), command.getLogin());
         if (!userList.isEmpty()) {
-            throw new UserAlreadyExistsException("login ou e-mail já existentes");
+            throw new UserAlreadyExistsException();
         }
         final var user = User.builder()
                 .email(command.getEmail())

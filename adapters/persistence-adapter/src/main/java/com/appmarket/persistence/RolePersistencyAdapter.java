@@ -2,7 +2,7 @@ package com.appmarket.persistence;
 
 import com.appmarket.application.port.out.AddRole;
 import com.appmarket.application.port.out.GetRoleByUserId;
-import com.appmarket.exception.InconsistencyException;
+import com.appmarket.exception.RoleNotExistsException;
 import com.appmarket.persistence.model.RoleEntity;
 import com.appmarket.persistence.repository.RoleRepository;
 import lombok.AccessLevel;
@@ -25,7 +25,7 @@ public class RolePersistencyAdapter implements AddRole, GetRoleByUserId {
     public void addRoleToUser(final UUID id, final String role) {
         roleRepository.findByName(role)
                 .map(roleEntity -> roleRepository.saveRelation(id, roleEntity.getId()))
-                .orElseThrow(() -> new InconsistencyException("role does not exists"));
+                .orElseThrow(RoleNotExistsException::new);
     }
 
     @Override

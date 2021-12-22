@@ -1,6 +1,6 @@
 package com.appmarket.persistence;
 
-import com.appmarket.exception.InconsistencyException;
+import com.appmarket.exception.RoleNotExistsException;
 import com.appmarket.persistence.repository.RoleRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -42,7 +42,7 @@ class RolePersistencyAdapterTest {
         final var role = "NOEXISTS";
         final var id = UUID.fromString("cfa485c7-d850-43e4-87a5-d15ef37f16c1");
 
-        Assertions.assertThrows(InconsistencyException.class, () -> {
+        Assertions.assertThrows(RoleNotExistsException.class, () -> {
             rolePersistencyAdapter.addRoleToUser(id, role);
         });
     }

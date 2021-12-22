@@ -10,16 +10,19 @@ import java.util.Map;
 @Value
 @EqualsAndHashCode(callSuper = false)
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
-public class InconsistencyException extends BusinessException{
+public class RoleNotExistsException extends BusinessException{
 
-    static String code = "INCONSISTENCY";
+    static String code = "ROLE_NOT_EXISTS";
 
-    public InconsistencyException(Map<String, String> body) {
+    public RoleNotExistsException(Map<String, String> body) {
         super(code, body);
     }
 
-    public InconsistencyException(String message) {
+    public RoleNotExistsException(String message) {
         super(message, code);
     }
 
+    public RoleNotExistsException() {
+        super(code);
+    }
 }

@@ -12,7 +12,7 @@ import java.util.Map;
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class PasswordNotMatchException extends BusinessException{
 
-    static String code = "PASSWORD_ALREADY_EXISTS";
+    static String code = "PASSWORD_NOT_MATCH";
 
     public PasswordNotMatchException(Map<String, String> body) {
         super(code, body);
@@ -20,5 +20,9 @@ public class PasswordNotMatchException extends BusinessException{
 
     public PasswordNotMatchException(String message) {
         super(message, code);
+    }
+
+    public PasswordNotMatchException() {
+        super(code);
     }
 }

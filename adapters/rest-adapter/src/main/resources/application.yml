@@ -1,0 +1,3 @@
+spring:
+  messages:
+    encoding: ISO-8859-1

@@ -23,4 +23,9 @@ public class BusinessException extends RuntimeException{
         this.code = code;
         this.body = Collections.singletonMap("message", message);
     }
+
+    public BusinessException(String code) {
+        this.code = code;
+        this.body = Collections.emptyMap();
+    }
 }

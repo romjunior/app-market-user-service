@@ -3,7 +3,7 @@ package com.appmarket.controllers.create;
 import com.appmarket.application.port.in.CreateUserUseCase;
 import com.appmarket.config.CustomMediaType;
 import com.appmarket.config.RestErrorResponse;
-import com.appmarket.exception.InconsistencyException;
+import com.appmarket.exception.RoleNotExistsException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -12,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.UUID;
 
@@ -43,7 +44,7 @@ class CreateUserControllerTest {
 
 
         mockMvc.perform(post("/user")
-                .contentType(CustomMediaType.USER_V1)
+                        .contentType(CustomMediaType.USER_V1)
                         .content(objectMapper.writeValueAsString(userRequest)))
                 .andExpect(status().isCreated())
                 .andExpect(content().json(objectMapper.writeValueAsString(expectedResponse)))
@@ -74,11 +75,16 @@ class CreateUserControllerTest {
         final var userRequest = buildRequest("1234567", "12345678");
 
         final var expectedErrorResponse = new RestErrorResponse(
-                "PASSWORD_ALREADY_EXISTS",
+                "PASSWORD_NOT_MATCH",
                 Map.of(
-                        "message", "Senhas não são iguais"
+                        "message", "As senhas não conferem"
                 )
         );
+
+        System.out.println("Enconding dessa merda" + mockMvc.perform(post("/user")
+                        .contentType(CustomMediaType.USER_V1)
+                        .content(objectMapper.writeValueAsString(userRequest)))
+                .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8));
 
         mockMvc.perform(post("/user")
                         .contentType(CustomMediaType.USER_V1)
@@ -91,11 +97,11 @@ class CreateUserControllerTest {
     void quandoTiverUmErroDeInconsistencia_EntaoRetorna400ComRespostaDeNegocio() throws Exception {
         final var userRequest = buildRequest("1234567", "1234567");
 
-        Mockito.when(createUserUseCase.createUser(any())).thenThrow(new InconsistencyException("role does not exists"));
+        Mockito.when(createUserUseCase.createUser(any())).thenThrow(new RoleNotExistsException());
         final var expectedErrorResponse = new RestErrorResponse(
-                "INCONSISTENCY",
+                "ROLE_NOT_EXISTS",
                 Map.of(
-                        "message", "role does not exists"
+                        "message", "Role não existe"
                 )
         );
 
