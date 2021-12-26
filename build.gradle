@@ -8,6 +8,7 @@ ext {
 	setProperty('springfoxVersion', '3.0.0')
 	setProperty('mapstructVersion', '1.4.2.Final')
 	setProperty('openapiVersion', '1.5.10')
+	setProperty('password4jVersion', '1.5.4')
 }
 
 subprojects {
@@ -105,6 +106,7 @@ project(':adapters:persistence-adapter') {
 project(':application') {
 	dependencies {
 		implementation 'org.springframework.boot:spring-boot-starter-validation'
+		implementation "com.password4j:password4j:${password4jVersion}"
 	}
 }
 

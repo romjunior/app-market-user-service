@@ -6,6 +6,7 @@ import com.appmarket.application.port.out.SearchUserByEmailOrLogin;
 import com.appmarket.domain.Role;
 import com.appmarket.domain.User;
 import com.appmarket.exception.UserAlreadyExistsException;
+import com.password4j.Password;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +28,7 @@ record CreateUserService(SearchUserByEmailOrLogin searchUserByEmailOrLogin,
                 .email(command.getEmail())
                 .login(command.getLogin())
                 .name(command.getName())
-                .password(command.getPassword())
+                .password(encryptPassword(command.getPassword()))
                 .document(command.getDocument())
                 .roles(Set.of(Role.DEFAULT.name()))
                 .active(true)
@@ -38,5 +39,9 @@ record CreateUserService(SearchUserByEmailOrLogin searchUserByEmailOrLogin,
         log.info("Objeto criado: " + userCreated);
 
         return userCreated.id();
+    }
+
+    String encryptPassword(final String password) {
+        return Password.hash(password).withBCrypt().getResult();
     }
 }

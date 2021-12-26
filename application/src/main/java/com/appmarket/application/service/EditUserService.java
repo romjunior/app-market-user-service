@@ -4,6 +4,7 @@ import com.appmarket.application.port.in.EditUserUseCase;
 import com.appmarket.application.port.out.EditUser;
 import com.appmarket.application.port.out.SearchUserById;
 import com.appmarket.domain.User;
+import com.password4j.Password;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -29,6 +30,6 @@ record EditUserService(SearchUserById searchUserById,
     }
 
     String getPassword(final String password, final String newPassword) {
-        return newPassword == null ? password : newPassword;
+        return newPassword == null ? password : Password.hash(newPassword).withBCrypt().getResult();
     }
 }

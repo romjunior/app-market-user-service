@@ -5,6 +5,7 @@ import com.appmarket.application.port.out.CreateUser;
 import com.appmarket.application.port.out.SearchUserByEmailOrLogin;
 import com.appmarket.domain.User;
 import com.appmarket.exception.UserAlreadyExistsException;
+import com.password4j.Password;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -100,5 +101,12 @@ class CreateUserServiceTest {
         Assertions.assertTrue(expectedUUID instanceof UUID);
         Mockito.verify(searchUserByEmailOrLogin).searchUserByEmailOrLogin(email, login);
         Mockito.verify(createUser).createUser(Mockito.any());
+    }
+
+    @Test
+    void devecriptografarASenhaComBcrypt() {
+        final var senhaPlain = "123";
+        final var result = createUserService.encryptPassword(senhaPlain);
+        Assertions.assertTrue(Password.check(senhaPlain, result).withBCrypt());
     }
 }
