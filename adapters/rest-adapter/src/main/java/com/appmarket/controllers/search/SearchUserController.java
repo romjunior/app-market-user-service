@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @RestController
 record SearchUserController(SearchUserIdUseCase searchUserIdUseCase, SearchUserUseCase searchUserUseCase) {
@@ -31,7 +30,7 @@ record SearchUserController(SearchUserIdUseCase searchUserIdUseCase, SearchUserU
             return ResponseEntity.notFound().build();
         return ResponseEntity.ok(result
                 .stream().map(UserDTO::buildDTO)
-                .collect(Collectors.toList()));
+                .toList());
     }
 
 }
