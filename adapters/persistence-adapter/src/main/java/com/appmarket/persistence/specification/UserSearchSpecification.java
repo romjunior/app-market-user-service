@@ -1,4 +1,4 @@
-package com.appmarket.persistence;
+package com.appmarket.persistence.specification;
 
 import com.appmarket.persistence.model.UserEntity;
 import org.springframework.data.jpa.domain.Specification;
@@ -11,7 +11,7 @@ public final class UserSearchSpecification {
 
     private UserSearchSpecification() {}
 
-    static Specification<UserEntity> buildSearch(final String name, final String email, final String login, final String document) {
+    public static Specification<UserEntity> buildSearch(final String name, final String email, final String login, final String document) {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 

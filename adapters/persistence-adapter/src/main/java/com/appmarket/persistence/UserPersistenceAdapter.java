@@ -10,6 +10,7 @@ import com.appmarket.application.port.out.SearchUserByQuery;
 import com.appmarket.domain.User;
 import com.appmarket.persistence.mapper.UserMapper;
 import com.appmarket.persistence.repository.UserRepository;
+import com.appmarket.persistence.specification.UserSearchSpecification;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
