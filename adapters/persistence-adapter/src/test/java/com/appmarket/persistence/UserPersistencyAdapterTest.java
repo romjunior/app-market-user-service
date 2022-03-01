@@ -162,4 +162,49 @@ class UserPersistencyAdapterTest {
         Assertions.assertEquals(List.of(), userPersistenceAdapter.searchUserByEmailOrLogin(searchEmail, searchLogin));
     }
 
+    @Test
+    void QuandoEuPesquisarUmUsuarioQueExistaPorCriteria_devoRetornarUmaListaComACorrespondencia() {
+        final var searchEmail = "jhon@gmail.com";
+        final var searchLogin = "birobiro";
+
+        final var user = User.builder()
+                .name("john")
+                .document("12345678910")
+                .email("jhon@gmail.com")
+                .login("jhon")
+                .password("1234567")
+                .active(true)
+                .roles(Set.of(Role.DEFAULT.name()))
+                .build();
+
+        Mockito.doNothing().when(addRole).addRoleToUser(any(), eq(Role.DEFAULT.name()));
+        Mockito.when(getRoleByUserId.getRolesByUserId(any())).thenReturn(Set.of(Role.DEFAULT.name()));
+        final var savedUser = userPersistenceAdapter.createUser(user);
+
+        Assertions.assertEquals(List.of(savedUser), userPersistenceAdapter.searchUser(null, searchEmail, searchLogin, null));
+    }
+
+    @Test
+    void QuandoEuPesquisarUmUsuarioQueNaoExistaPorCriteria_devoRetornarUmaListaVazia() {
+        final var searchEmail = "maria@gmail.com";
+        final var searchLogin = "maria";
+
+        final var user = User.builder()
+                .name("john")
+                .document("12345678910")
+                .email("jhon@gmail.com")
+                .login("jhon")
+                .password("1234567")
+                .active(true)
+                .roles(Set.of(Role.DEFAULT.name()))
+                .build();
+
+        Mockito.doNothing().when(addRole).addRoleToUser(any(), eq(Role.DEFAULT.name()));
+        Mockito.when(getRoleByUserId.getRolesByUserId(any())).thenReturn(Set.of(Role.DEFAULT.name()));
+
+        userPersistenceAdapter.createUser(user);
+
+        Assertions.assertEquals(List.of(), userPersistenceAdapter.searchUser(null, searchEmail, searchLogin, null));
+    }
+
 }
