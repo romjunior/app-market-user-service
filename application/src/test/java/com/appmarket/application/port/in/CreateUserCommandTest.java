@@ -10,13 +10,13 @@ class CreateUserCommandTest {
 
 
     @Test
-    void deveRetornarExceptionCasoOnomeDocumentEmailELoginSejaVazio() {
+    void deveRetornarExceptionCasoOnomeDocumentEmailEloginSejaVazio() {
         var createUserCommand = CreateUserUseCase.CreateUserCommand.builder();
         Assertions.assertThrows(ConstraintViolationException.class, createUserCommand::build);
     }
 
     @Test
-    void deveRetornarExceptionCasoODocumentoFiqueForaDoTamanhoEsperado() {
+    void deveRetornarExceptionCasoOdocumentoFiqueForaDoTamanhoEsperado() {
         var createUserCommand = CreateUserUseCase.CreateUserCommand.builder()
                 .name("teste")
                 .login("teste")

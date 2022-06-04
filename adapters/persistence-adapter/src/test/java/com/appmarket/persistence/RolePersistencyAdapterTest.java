@@ -27,7 +27,7 @@ class RolePersistencyAdapterTest {
 
     @Test
     @Sql("createUser.sql")
-    void QuandoEuAdicionarARole_ElaDeveSerAdicionadaComSucesso() {
+    void quandoEuAdicionarAroleElaDeveSerAdicionadaComSucesso() {
         final var role = "DEFAULT";
         final var id = UUID.fromString("cfa485c7-d850-43e4-87a5-d15ef37f16c1");
 
@@ -38,7 +38,7 @@ class RolePersistencyAdapterTest {
 
     @Test
     @Sql("createUser.sql")
-    void QuandoEuTentarAdicionarUmaRoleQueNaoExiste_DevoRetornarUmaExcecao() {
+    void quandoEuTentarAdicionarUmaRoleQueNaoExisteDevoRetornarUmaExcecao() {
         final var role = "NOEXISTS";
         final var id = UUID.fromString("cfa485c7-d850-43e4-87a5-d15ef37f16c1");
 
@@ -49,7 +49,7 @@ class RolePersistencyAdapterTest {
 
     @Test
     @Sql("createUser.sql")
-    void QuandoEuPesquisarUmUsuarioComRoleExistente_deveRetornarAListaDeRoles() {
+    void quandoEuPesquisarUmUsuarioComRoleExistentedeveRetornarAlistaDeRoles() {
         final var role = "DEFAULT";
         final var id = UUID.fromString("cfa485c7-d850-43e4-87a5-d15ef37f16c1");
 
@@ -60,7 +60,7 @@ class RolePersistencyAdapterTest {
 
     @Test
     @Sql("createUser.sql")
-    void QuandoEuPesquisarAsRolesDeUmUsuarioQueNaoTenhaRole_deveRetornarUmaListaVaziaDeRoles() {
+    void quandoEuPesquisarAsRolesDeUmUsuarioQueNaoTenhaRoledeveRetornarUmaListaVaziaDeRoles() {
         final var id = UUID.fromString("cfa485c7-d850-43e4-87a5-d15ef37f16c1");
 
         Assertions.assertEquals(Set.of(), rolePersistencyAdapter.getRolesByUserId(id));
@@ -68,7 +68,7 @@ class RolePersistencyAdapterTest {
     }
 
     @Test
-    void QuandoEuPesquisarAsRolesDeUmUsuarioQueNaoExiste_deveRetornarUmaListaVaziaDeRoles() {
+    void quandoEuPesquisarAsRolesDeUmUsuarioQueNaoExistedeveRetornarUmaListaVaziaDeRoles() {
         final var id = UUID.randomUUID();
 
         Assertions.assertEquals(Set.of(), rolePersistencyAdapter.getRolesByUserId(id));

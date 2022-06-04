@@ -33,7 +33,7 @@ class DeactivateUserServiceTest {
     }
 
     @Test
-    void deveRetornarOIDoUsuarioDesativadoCasoSejaSucesso() {
+    void deveRetornarOiDdoUsuarioDesativadoCasoSejaSucesso() {
         final var command = DeactivateUserUseCase
                 .DeactivateUserCommand
                 .of(UUID.randomUUID());
@@ -52,7 +52,7 @@ class DeactivateUserServiceTest {
     }
 
     @Test
-    void deveRetornarVazioCasoNaoExistaOUsuario() {
+    void deveRetornarVazioCasoNaoExistaOusuario() {
         final var command = DeactivateUserUseCase
                 .DeactivateUserCommand
                 .of(UUID.randomUUID());

@@ -32,7 +32,7 @@ class EditUserServiceTest {
     }
 
     @Test
-    void deveRetornarUmErroCasoOUsuarioNaoExista() {
+    void deveRetornarUmErroCasoOusuarioNaoExista() {
         final var uuid = UUID.randomUUID();
         final var command = EditUserUseCase.EditUserCommand.builder()
                 .id(uuid)
@@ -79,7 +79,7 @@ class EditUserServiceTest {
     }
 
     @Test
-    void deveRetornarASenhaAtual() {
+    void deveRetornarAsenhaAtual() {
         final var senhaAtualPlain = "12345";
         final var senhaAtualEncrypted = Password.hash(senhaAtualPlain).withBCrypt().getResult();
         final var result = editUserService.getPassword(senhaAtualEncrypted, null);
@@ -87,7 +87,7 @@ class EditUserServiceTest {
     }
 
     @Test
-    void deveRetornarASenhaB() {
+    void deveRetornarAsenhaB() {
         final var senhaAtual = "12345";
         final var senhaNovo = "123";
         final var result = editUserService.getPassword(senhaAtual, senhaNovo);

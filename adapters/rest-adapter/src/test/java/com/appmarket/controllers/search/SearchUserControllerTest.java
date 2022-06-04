@@ -40,7 +40,7 @@ class SearchUserControllerTest {
 
 
     @Test
-    void quandoTiverUmInputValido_deveRetornar200comOUsuarioEncontrado() throws Exception {
+    void quandoTiverUmInputValido_deveRetornar200comOusuarioEncontrado() throws Exception {
         final var uuid = UUID.randomUUID();
 
         final var user = User.builder()
@@ -90,7 +90,7 @@ class SearchUserControllerTest {
     }
 
     @Test
-    void quandotiverUmInput_deveRetornarOResultadoDaBusca() throws Exception {
+    void quandoTiverUmInput_deveRetornarOresultadoDaBusca() throws Exception {
         final var body = new UserRequestDTO("birobiro", "", "biro", "");
 
         final var user = User.builder()

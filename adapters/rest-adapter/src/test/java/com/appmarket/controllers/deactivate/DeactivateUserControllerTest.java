@@ -41,7 +41,7 @@ class DeactivateUserControllerTest {
     }
 
     @Test
-    void quandoTiverUmInputValidoENaoEncontrarOUsuario_deveRetornar404() throws Exception {
+    void quandoTiverUmInputValidoEnaoEncontrarOusuario_deveRetornar404() throws Exception {
         final var uuid = UUID.randomUUID();
 
         Mockito.when(deactivateUserUseCase.deactivateUser(any())).thenReturn(Optional.empty());

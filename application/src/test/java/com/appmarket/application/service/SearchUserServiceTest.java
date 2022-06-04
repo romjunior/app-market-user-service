@@ -33,7 +33,7 @@ class SearchUserServiceTest {
     }
 
     @Test
-    void deveRetornarOUsuarioDadoUmIdExistenteNaBase() {
+    void deveRetornarOusuarioDadoUmIdExistenteNaBase() {
         final var uuid = UUID.randomUUID();
         final var user = User.builder()
                 .build();

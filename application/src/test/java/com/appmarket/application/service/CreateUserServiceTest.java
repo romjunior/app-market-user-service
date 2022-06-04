@@ -34,7 +34,7 @@ class CreateUserServiceTest {
     }
 
     @Test
-    void deveRetornarUmaExceptionDeUsuarioJaExistenteNaBaseCasoOLoginOuEmailJaEstejaCadastradoNaBase() {
+    void deveRetornarUmaExceptionDeUsuarioJaExistenteNaBaseCasoOloginOuEmailJaEstejaCadastradoNaBase() {
         final var email = "teste@teste.com";
         final var login = "teste";
 
@@ -104,7 +104,7 @@ class CreateUserServiceTest {
     }
 
     @Test
-    void devecriptografarASenhaComBcrypt() {
+    void devecriptografarAsenhaComBcrypt() {
         final var senhaPlain = "123";
         final var result = createUserService.encryptPassword(senhaPlain);
         Assertions.assertTrue(Password.check(senhaPlain, result).withBCrypt());

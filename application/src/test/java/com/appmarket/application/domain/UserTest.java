@@ -11,7 +11,7 @@ import java.util.UUID;
 class UserTest {
 
     @Test
-    void deveRetornarOMesmoUsuarioDesativado() {
+    void deveRetornarOmesmoUsuarioDesativado() {
         final var user = User.builder()
                 .id(UUID.randomUUID())
                 .login("jhon")

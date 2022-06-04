@@ -16,7 +16,7 @@ class EditUserCommandTest {
     }
 
     @Test
-    void deveRetornarExceptionCasoODocumentoFiqueForaDoTamanhoEsperado() {
+    void deveRetornarExceptionCasoOdocumentoFiqueForaDoTamanhoEsperado() {
         var editUserCommand = EditUserUseCase.EditUserCommand.builder()
                 .id(UUID.randomUUID())
                 .name("teste")
@@ -51,7 +51,7 @@ class EditUserCommandTest {
     }
 
     @Test
-    void deveRetornarExceptionCasoASenhaSejaNula() {
+    void deveRetornarExceptionCasoAsenhaSejaNula() {
         var editUserCommand = EditUserUseCase.EditUserCommand.builder()
                 .id(UUID.randomUUID())
                 .name("teste")

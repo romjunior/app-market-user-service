@@ -9,12 +9,12 @@ import java.util.UUID;
 class DeactivateUserCommandTest {
 
     @Test
-    void deveRetornarUmaExcecaoCasoOIdSejaNulo() {
+    void deveRetornarUmaExcecaoCasoOidSejaNulo() {
         Assertions.assertThrows(ConstraintViolationException.class, () -> DeactivateUserUseCase.DeactivateUserCommand.of(null));
     }
 
     @Test
-    void deveConstruirUmObjetoValidoERetornarOUUID() {
+    void deveConstruirUmObjetoValidoEretornaroUUID() {
         final var uuid = UUID.randomUUID();
         final var command = DeactivateUserUseCase.DeactivateUserCommand.of(uuid);
 

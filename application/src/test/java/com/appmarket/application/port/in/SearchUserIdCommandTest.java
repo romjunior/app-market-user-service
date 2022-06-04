@@ -9,12 +9,12 @@ import java.util.UUID;
 class SearchUserIdCommandTest {
 
     @Test
-    void deveRetornarUmaExcecaoCasoOIdSejaNulo() {
+    void deveRetornarUmaExcecaoCasoOidSejaNulo() {
         Assertions.assertThrows(ConstraintViolationException.class, () -> SearchUserIdUseCase.SearchUserIdCommand.of(null));
     }
 
     @Test
-    void deveConstruirUmObjetoValidoERetornarOUUID() {
+    void deveConstruirUmObjetoValidoEretornaroUUID() {
         final var uuid = UUID.randomUUID();
         final var command = SearchUserIdUseCase.SearchUserIdCommand.of(uuid);
 

@@ -34,7 +34,7 @@ class CreateUserControllerTest {
     private CreateUserUseCase createUserUseCase;
 
     @Test
-    void quandoTiverUmInputValido_EntaoRetorna201ComAResponse() throws Exception {
+    void quandoTiverUmInputValido_EntaoRetorna201ComAresponse() throws Exception {
         final var userRequest = buildRequest("12345678", "12345678");
         final var uuid = UUID.randomUUID();
 
@@ -52,7 +52,7 @@ class CreateUserControllerTest {
     }
 
     @Test
-    void quandoTiverUmInputInvalido_EntaoRetorna400ComAResponseDeErroDeVlidacao() throws Exception {
+    void quandoTiverUmInputInvalido_EntaoRetorna400ComAresponseDeErroDeValidacao() throws Exception {
         final var userRequest = buildRequest("123456789", "123456789");
 
         final var expectedErrorResponse = new RestErrorResponse(

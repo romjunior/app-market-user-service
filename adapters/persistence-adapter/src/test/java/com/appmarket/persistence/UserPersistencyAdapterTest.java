@@ -44,7 +44,7 @@ class UserPersistencyAdapterTest {
     }
 
     @Test
-    void QuandoSalvarUmUsuario_AoConsultarDevoRetornarEle() {
+    void quandoSalvarUmUsuario_AoConsultarDevoRetornarEle() {
         final var user = User.builder()
                 .name("john")
                 .document("12345678910")
@@ -64,7 +64,7 @@ class UserPersistencyAdapterTest {
     }
 
     @Test
-    void QuandoEditarUmUsuario_AoConsultarDevoRetornarEleAtualizado() {
+    void quandoEditarUmUsuario_AoConsultarDevoRetornarEleAtualizado() {
         final var user = User.builder()
                 .name("john")
                 .document("12345678910")
@@ -96,7 +96,7 @@ class UserPersistencyAdapterTest {
     }
 
     @Test
-    void QuandoEuPesquisarUmUsuarioQueExistaPorEmail_devoRetornarUmaListaComACorrespondencia() {
+    void quandoEuPesquisarUmUsuarioQueExistaPorEmail_devoRetornarUmaListaComAcorrespondencia() {
         final var searchEmail = "jhon@gmail.com";
         final var searchLogin = "birobiro";
 
@@ -118,7 +118,7 @@ class UserPersistencyAdapterTest {
     }
 
     @Test
-    void QuandoEuPesquisarUmUsuarioQueExistaPorLogin_devoRetornarUmaListaComACorrespondencia() {
+    void quandoEuPesquisarUmUsuarioQueExistaPorLogin_devoRetornarUmaListaComAcorrespondencia() {
         final var searchEmail = "birobiro@gmail.com";
         final var searchLogin = "jhon";
 
@@ -140,7 +140,7 @@ class UserPersistencyAdapterTest {
     }
 
     @Test
-    void QuandoEuPesquisarUmUsuarioQueNaoExistaPorLoginOuEmailPesquisa_devoRetornarUmaListaVazia() {
+    void quandoEuPesquisarUmUsuarioQueNaoExistaPorLoginOuEmailPesquisa_devoRetornarUmaListaVazia() {
         final var searchEmail = "maria@gmail.com";
         final var searchLogin = "maria";
 
@@ -163,7 +163,7 @@ class UserPersistencyAdapterTest {
     }
 
     @Test
-    void QuandoEuPesquisarUmUsuarioQueExistaPorCriteria_devoRetornarUmaListaComACorrespondencia() {
+    void quandoEuPesquisarUmUsuarioQueExistaPorCriteria_devoRetornarUmaListaComAcorrespondencia() {
         final var searchEmail = "jhon@gmail.com";
         final var searchLogin = "birobiro";
 
@@ -185,7 +185,7 @@ class UserPersistencyAdapterTest {
     }
 
     @Test
-    void QuandoEuPesquisarUmUsuarioQueNaoExistaPorCriteria_devoRetornarUmaListaVazia() {
+    void quandoEuPesquisarUmUsuarioQueNaoExistaPorCriteria_devoRetornarUmaListaVazia() {
         final var searchEmail = "maria@gmail.com";
         final var searchLogin = "maria";
 
