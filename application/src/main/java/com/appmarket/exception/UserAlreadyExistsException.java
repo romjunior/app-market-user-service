@@ -10,7 +10,7 @@ import java.util.Map;
 @Value
 @EqualsAndHashCode(callSuper = false)
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
-public class UserAlreadyExistsException extends BusinessException{
+public class UserAlreadyExistsException extends BusinessException {
 
     static String code = "USER_ALREADY_EXISTS";
 

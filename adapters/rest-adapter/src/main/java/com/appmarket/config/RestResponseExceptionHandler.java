@@ -57,8 +57,9 @@ public class RestResponseExceptionHandler extends ResponseEntityExceptionHandler
     }
 
     Map<?, ?> getMessageIfBodyIsEmpty(BusinessException ex) {
-        if(ex.getBody().isEmpty())
+        if (ex.getBody().isEmpty()) {
             return Map.of("message", messageSource.getMessage(ex.getCode().replace("_", ".").toLowerCase(), null, Locale.getDefault()));
+        }
         return ex.getBody();
     }
 

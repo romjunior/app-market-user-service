@@ -54,7 +54,7 @@ public interface EditUserUseCase {
         }
 
         private void validatePassword(final String password, final String confirmedPassword) {
-            if(null != password && !password.equals(confirmedPassword)) {
+            if (null != password && !password.equals(confirmedPassword)) {
                 throw new PasswordNotMatchException();
             }
         }

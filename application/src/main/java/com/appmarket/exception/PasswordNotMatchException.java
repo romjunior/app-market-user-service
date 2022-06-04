@@ -10,7 +10,7 @@ import java.util.Map;
 @Value
 @EqualsAndHashCode(callSuper = false)
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
-public class PasswordNotMatchException extends BusinessException{
+public class PasswordNotMatchException extends BusinessException {
 
     static String code = "PASSWORD_NOT_MATCH";
 

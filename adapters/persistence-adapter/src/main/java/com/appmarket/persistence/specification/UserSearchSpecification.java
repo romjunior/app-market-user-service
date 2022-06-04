@@ -15,19 +15,19 @@ public final class UserSearchSpecification {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
-            if(name != null && !name.isEmpty()) {
+            if (name != null && !name.isEmpty()) {
                 predicates.add(criteriaBuilder.equal(root.get("name"), name));
             }
 
-            if(email != null && !email.isEmpty()) {
+            if (email != null && !email.isEmpty()) {
                 predicates.add(criteriaBuilder.equal(root.get("email"), email));
             }
 
-            if(login != null && login.isEmpty()) {
+            if (login != null && login.isEmpty()) {
                 predicates.add(criteriaBuilder.equal(root.get("login"), login));
             }
 
-            if(document != null && document.isEmpty()) {
+            if (document != null && document.isEmpty()) {
                 predicates.add(criteriaBuilder.equal(root.get("document"), document));
             }
 

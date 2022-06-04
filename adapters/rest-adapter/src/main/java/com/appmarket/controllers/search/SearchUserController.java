@@ -26,8 +26,9 @@ record SearchUserController(SearchUserIdUseCase searchUserIdUseCase, SearchUserU
     @GetMapping(path = "/user", consumes = CustomMediaType.USER_V1, produces = CustomMediaType.USER_V1)
     public ResponseEntity<List<UserDTO>> searchUserByCriteria(@RequestBody UserRequestDTO dto) {
         final var result = searchUserUseCase.searchUser(new SearchUserUseCase.SearchUserQuery(dto.name(), dto.email(), dto.login(), dto.document()));
-        if(result.isEmpty())
+        if (result.isEmpty()) {
             return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok(result
                 .stream().map(UserDTO::buildDTO)
                 .toList());

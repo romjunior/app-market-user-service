@@ -16,6 +16,7 @@ subprojects {
 	apply plugin: 'io.spring.dependency-management'
 	apply plugin: 'java-library'
 	apply plugin: 'jacoco'
+	apply plugin: 'checkstyle'
 
 	sourceCompatibility = '17'
 	group = 'com.appmarket'
@@ -71,6 +72,11 @@ subprojects {
 		reports {
 			xml.enabled(true)
 		}
+	}
+
+	checkstyle {
+		toolVersion = '10.3'
+		configFile = rootProject.file("config/checkstyle/checkstyle.xml")
 	}
 }
 
